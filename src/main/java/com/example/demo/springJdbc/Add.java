@@ -14,9 +14,9 @@
 //    }
 //
 //    public void addUser(Employee user) {
-//        String sql = "INSERT INTO admin (admin_id, admin_fullname,admin_username,admin_password,admin_email,admin_phone,admin_address  )"
-//        		+ " VALUES (1, 2,3,4,5,6,7)";
-//        jdbcTemplate.update(sql, user.getAdmin_id(), user.getAdmin_fullname(), user.getAdmin_username(),
+//        String sql = "INSERT INTO admin ( admin_fullname,admin_username,admin_password,admin_email,admin_phone,admin_address  )"
+//        		+ " VALUES ( 2,3,4,5,6,7)";
+//        jdbcTemplate.update(sql,  user.getAdmin_fullname(), user.getAdmin_username(),
 //        user.getAdmin_password(), user.getAdmin_email(),user.getAdmin_phone(), user.getAdmin_address());
 //    }
 //   
