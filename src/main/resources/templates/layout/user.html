@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Page Title</title>
+
+     
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/sweetalert.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> planttree@gmail.com</li>
+                                <li>Giao hàng miễn phí cho tất cả đơn hàng từ 10000$</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                            </div>
+                         
+                        <div class="header__top__right__auth">
+                            <div class="dropdown" style=""> 
+                                <a href="#"><i class="fa fa-user"></i> </a>
+                                
+                                    <div class="dropdown-content" style=""> 
+                                        <a href="{{URL::to('/myaccount')}}"> Tài khoản</a>
+                                        <a href="{{URL::to('/history')}}"> Lịch sử</a>
+                                        <a href="{{URL::to('/user-logout')}}">Đăng xuất</a> 
+                                 </div>
+                              
+                                    <div class="dropdown-content" style=""> 
+                                        <a href="{{URL::to('/form_signin')}}"> Đăng nhập</a>
+                                 </div>
+                                    
+                            </div>
+
+                        </div>
+
+
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo" style="text-align: center;">
+                        <a href="./index.html"><img src="{{ asset('img/logo1.jpg') }}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="text-align: center;">
+                    <nav class="header__menu">
+                        <ul>
+                            <li><a href="{{ route('product.home') }}">Trang chủ</a></li>
+                            <li class="active"><a href="{{ route('product.listproduct') }}">Cửa hàng</a></li>
+                      
+                            <li><a href="{{ route('product.blog') }}">Bài viết</a></li>
+                            <li><a href="{{ route('contact') }}">Liên hệ</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                 
+                        <ul>
+                            <li><a href=" {{URL::to('/show_wishlist')}} "><i class="fa fa-heart"></i> <span></span></a></li>
+                            <li><a href="{{ route('product.cart') }}"><i class="fa fa-shopping-bag"></i> <span>></span></a></li>
+                        </ul>
+                        <div class="header__cart__price">Tổng: <span></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+
+<section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>Danh mục sản phẩm</span>
+                        </div>
+                        <ul>
+                     
+                            <li><a href="{{ route('product.listcategory',['id'=> $category->name_category]) }}"></a></li>
+                         
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="{{ route('search.nameca') }}"  enctype="multipart/form-data" method="POST">
+                                
+                                <div class="hero__search__categories">
+                                    Danh mục
+                                    
+                                </div>
+                                <input type="text" name="name_product" placeholder="Nhập tên sản phẩm cần tìm">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div layout:fragment="slidebar"></div>
+    <section layout:fragment="content">
+		
+	</section>
+	
+	
+
+<footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img  src="{{ asset('img/logo1.jpg') }}" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Địa chỉ: 470 Trần Đại Nghĩa - Ngũ Hành Sơn - Đà Nẵng</li>
+                            <li>Điện thoại: +65 11.188.888</li>
+                            <li>Email: planttree@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Liên kết</h6>
+                        <ul>
+                            <li><a href="#">Chúng tôi</a></li>
+                            <li><a href="#">Cửa hàng</a></li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
+                            <li><a href="#">Chính sách bảo hành</a></li>
+                            <li><a href="#">Giao hàng</a></li>
+                            <li><a href="#">Bản đồ</a></li>
+                        </ul>
+                        <ul>
+                            
+                            <li><a href="#">Dịch vụ</a></li>
+                            <li><a href="#">Dự án</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="#">Hỗ trợ trực tuyến</a></li>
+                            <li><a href="#">Chứng thực</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Theo dõi chúng tôi</h6>
+                        <p>Nhận thông tin cập nhật qua email về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
+                        <form action="#">
+                            <input type="text" placeholder="Email của bạn">
+                            <button type="submit" class="site-btn">Subscribe</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p> Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. 
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
+   Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. </p></div>
+                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script src="/js/sweetalert.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>
