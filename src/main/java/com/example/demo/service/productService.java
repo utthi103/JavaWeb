@@ -6,10 +6,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.productModel;
+import com.example.demo.Entity.product;
 import com.example.demo.repository.productRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class productService {
@@ -20,12 +21,25 @@ public class productService {
         this.productRepository = productRepository;
     }
 
-    public List<productModel> getAllProducts() {
-        return productRepository.getAllProducts();
+    public List<product> getAllProducts() {
+        return productRepository.findAll();
     }
-//    paginate	
-//    Page<productModel> getAll(Integer page) {
-//    	Pageable pageable = PageRequest.of(page-1, 3);
-//		return productRepository.findAll;
-//	}
+
+
+	public Page<product> findPage(int pageNumber) {
+		Pageable pageable = PageRequest.of(pageNumber-1, 6);
+		return this.productRepository.findAll(pageable);
+	}
+//	detail 
+	public product getProductById(int productId) {
+	    Optional<product> productOptional = productRepository.findById(productId);
+	    return productOptional.orElse(null);
+	}
+	
+	public List<product> getHighlightedProducts() {
+        return productRepository.findByOutstandProduct("có");
+    }
+	public List<product> newProduct() {
+        return productRepository.findTop4ByOrderByDateProductDesc();
+    }
 }

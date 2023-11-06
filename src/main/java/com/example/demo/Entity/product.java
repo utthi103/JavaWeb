@@ -2,11 +2,16 @@ package com.example.demo.Entity;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity
 public class product {	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private int id_product;
-	public product() {
-		super();
-	}
+	
 	private String name_product;
 	private String name_category;
 	private Float price_product;
@@ -14,12 +19,15 @@ public class product {
 	private String image1;
 	private String image2;
 	private String image3;
-	private Long decription_product;
-	private Long decription;
+	private String decription_product;
+	private String decription;
 	private int sale_product;
-	private String outstand_product;
-	private Date date_product;
+	private String outstandProduct;
+	private Date dateProduct;
 	private Float price_sale;
+	public product() {
+		super();
+	}
 	public int getId_product() {
 		return id_product;
 	}
@@ -68,16 +76,16 @@ public class product {
 	public void setImage3(String image3) {
 		this.image3 = image3;
 	}
-	public Long getDecription_product() {
+	public String getDecription_product() {
 		return decription_product;
 	}
-	public void setDecription_product(Long decription_product) {
+	public void setDecription_product(String decription_product) {
 		this.decription_product = decription_product;
 	}
-	public Long getDecription() {
+	public String getDecription() {
 		return decription;
 	}
-	public void setDecription(Long decription) {
+	public void setDecription(String decription) {
 		this.decription = decription;
 	}
 	public int getSale_product() {
@@ -87,16 +95,16 @@ public class product {
 		this.sale_product = sale_product;
 	}
 	public String getOutstand_product() {
-		return outstand_product;
+		return outstandProduct;
 	}
 	public void setOutstand_product(String outstand_product) {
-		this.outstand_product = outstand_product;
+		this.outstandProduct = outstand_product;
 	}
 	public Date getDate_product() {
-		return date_product;
+		return dateProduct;
 	}
 	public void setDate_product(Date date_product) {
-		this.date_product = date_product;
+		this.dateProduct = date_product;
 	}
 	public Float getPrice_sale() {
 		return price_sale;

@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Cửa hàng</title>
 </head>
 
 <body>
@@ -62,8 +62,12 @@
 						<div class="sidebar__item">
 							<h4>Danh mục sản phẩm</h4>
 							<ul>
-								<li><a href="{{ route('product.listcategory',['id'=> $category->name_category]) }}">Caay
-										phong thuy</a></li>
+								<li th:each="category : ${categories}">
+									<a th:href="@{'/product/listcategory?id=' + ${category.name_category}}"
+										th:text="${category.name_category}">
+
+									</a>
+								</li>
 
 							</ul>
 						</div>
@@ -118,36 +122,60 @@
 							</div>
 						</div>
 					</div>
-	<div class="row">
-    <div th:each="product : ${products}" class="col-lg-4 col-md-6 col-sm-6">
-        <div class="product__item">
-<div class="product__item__pic set-bg" th:data-setbg="@{/img/{imageName}(imageName=${product.image1})}">
-	          <div class="product__discount__percent" th:text="${product.sale_product +'%'}"></div>
-                <ul class="product__item__pic__hover">
-                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-<li><a th:href="@{/product/detail(id=${product.id_product})%}"><i class="fa fa-retweet"></i></a></li> 
-               </ul>
-            </div>
-            <div class="product__item__text">
-                <ul>
-                    <li class="start"><i class="fa-regular fa-star"></i></i></li>
-                    <li class="start"><i class="fa-regular fa-star"></i></i></li>
-                    <li class="start"><i class="fa-regular fa-star"></i></i></li>
-                    <li class="start"><i class="fa-regular fa-star"></i></i></li>
-                    <li class="start"><i class="fa-regular fa-star"></i></i></li>
-                </ul>
-                <span class="name_category" th:text="${product.name_category}" ></span>
-                <h6 th:text="${product.name_product}"><a href="#"></a></h6>
-				<span class="price_sale" th:text="${product.price_sale}"></span>
-				<span class="price_old" th:text="${product.price_product}"></span>
-            </div>
-        </div>
-    </div>
-</div>
+					<div class="row">
+						<div th:each="product : ${products}" class="col-lg-4 col-md-6 col-sm-6">
+							<div class="product__item">
+								<div class="product__item__pic set-bg"
+									th:data-setbg="@{/img/{imageName}(imageName=${product.image1})}">
+									<div class="product__discount__percent" th:text="${product.sale_product +'%'}">
+									</div>
+									<ul class="product__item__pic__hover">
+										<li><a href="#"><i class="fa fa-heart"></i></a></li>
+										<li><a th:href="@{/myshop/detail/{id}(id=${product.id_product})}"><i
+													class="fa fa-retweet"></i></a></li>
+									    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+
+									</ul>
+								</div>
+								<div class="product__item__text">
+									<ul>
+										<li class="start"><i class="fa-regular fa-star"></i></i></li>
+										<li class="start"><i class="fa-regular fa-star"></i></i></li>
+										<li class="start"><i class="fa-regular fa-star"></i></i></li>
+										<li class="start"><i class="fa-regular fa-star"></i></i></li>
+										<li class="start"><i class="fa-regular fa-star"></i></i></li>
+									</ul>
+									<span class="name_category" th:text="${product.name_category}"></span>
+									<h6 th:text="${product.name_product}"><a href="#"></a></h6>
+									<span class="price_sale" th:text="${product.price_sale}"></span>
+									<span class="price_old" th:text="${product.price_product}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<!--   Total Items [[${totalItem}]] : Page [[${currentPage}]] of [[${totalPage}]]
+    &nbsp; &nbsp; - &nbsp;-->
+							<ul class="pagination">
+								<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+									<a class="page-link" th:href="@{'/myshop/page/' + (${currentPage}-1)}">&laquo;</a>
+								</li>
+								<span th:each="i: ${#numbers.sequence(1, totalPage)}">
+									<li class="page-item" th:classappend="${currentPage == i} ? 'active'">
+										<a class="page-link" th:href="@{'/myshop/page/' + ${i}}" th:text="${i}"></a>
+									</li>
+								</span>
+								<li class="page-item" th:classappend="${currentPage == totalPage} ? 'disabled'">
+									<a class="page-link" th:href="@{'/myshop/page/' + (${currentPage}+1)}">&raquo;</a>
+								</li>
+							</ul>
+						</div>
+
 					</div>
 				</div>
-
 			</div>
+		</div>
+
+		</div>
 		</div>
 	</section>
 </body>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{/layout/user.html}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Chi tiết</title>
+</head>
+
+<body>
+
+
+	<section layout:fragment="content" class="product spad">
+		<div class="container">
+
+			<form>
+				<div class="row">
+					<input type="hidden" name="" value="{{ $products->id_product }}"
+						class="cart_product_id_{{ $products->id_product }}">
+					<input type="hidden" name="" value="{{ $products->name_product }}"
+						class="cart_product_name_{{ $products->id_product }}">
+					<input type="hidden" name="" value="{{ $products->image1 }}"
+						class="cart_product_img_{{  $products->id_product}}">
+					<input type="hidden" name="" value="{{ $products->price_sale }}"
+						class="cart_product_price_sale_{{ $products->id_product }}">
+					<input type="hidden" name="" value="{{ $products->count_product }}"
+						class="cart_product_count_{{ $products->id_product }}">
+					<div class="col-lg-6 col-md-6">
+						<div class="product__details__pic">
+							<div class="product__details__pic__item">
+
+								<img class="product__details__pic__item--large"
+									th:src="@{'/img/' + ${productbyId.image1}}" alt="">
+							</div>
+							<div class="product__details__pic__slider owl-carousel">
+								<img th:data-imgbigurl="@{/img/{imageName}(imageName=${productbyId['image1']})}"
+									th:src="@{/img/{imageName}(imageName=${productbyId['image1']})}" alt="">
+								<img th:data-imgbigurl="@{/img/{imageName}(imageName=${productbyId['image2']})}"
+									th:src="@{/img/{imageName}(imageName=${productbyId['image2']})}" alt="">
+								<img th:data-imgbigurl="@{/img/{imageName}(imageName=${productbyId['image3']})}"
+									th:src="@{/img/{imageName}(imageName=${productbyId['image3']})}" alt="">
+
+
+
+
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-lg-6 col-md-6">
+						<div class="product__details__text">
+							<h3 th:text="${productbyId.name_product}"></h3>
+							<div class="product__details__rating">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star-half-o"></i>
+								<span>(18 reviews)</span>
+							</div>
+
+
+							<div class="product__details__price" th:text="${productbyId.price_sale}"></div>
+
+							<div th:utext="${productbyId.decription_product}"></div>
+							<div class="product__details__quantity">
+								<div class="quantity">
+									<div class="pro-qty">
+										<input type="text" name="qty"
+											class="cart_product_qty_{{ $products->id_product }}">
+									</div>
+								</div>
+							</div>
+							<a type="button" style="padding: 13px 28px 14px; color: white;
+                    background: #7fad39;" data-id_product="{{  $products->id_product}}" class="add_to_cart">Thêm vào
+								giỏ hàng</a>
+							<a type="button" data-id_product="{{  $products->id_product}}"
+								class="heart-icon add_to_wishlist"><span class="icon_heart_alt"></span></a>
+
+							<ul>
+								<li><b>Phí giao hàng</b> <span>Miễn phí giao hàng.</span></li>
+								<li><b>Share</b>
+									<div class="share">
+										<a href="#" style="font-size: 20px; color: #7fad39;"><i
+												class="fa-brands fa-facebook"></i></a>
+										<a href="#" style="font-size: 20px;  color: #7fad39;"><i
+												class="fa-brands fa-twitter"></i></a>
+										<a href="#" style="font-size: 20px; color: #7fad39;"><i
+												class="fa-brands fa-instagram"></i></a>
+										<a href="#" style="font-size: 20px; color: #7fad39;"><i
+												class="fa-brands fa-pinterest"></i></a>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="product__details__tab">
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+										aria-selected="true">Mô tả</a>
+								</li>
+
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tabs-1" role="tabpanel">
+									<div class="product__details__tab__desc" style="    padding-left: 5%;">
+										<h6>Thông tin sản phẩm</h6>
+										<div th:utext="${productbyId.decription}"></div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+	
+	
+	<section layout:fragment="relatedProduct" class="related-product">
+		
+    <div class="col-lg-11 col-md-12">
+        <div class="product__discount" style="margin-left: 10%;">
+            <div class="section-title product__discount__title">
+                <h2>Related Product</h2>
+            </div>
+            <div class="row">
+                <div class="product__discount__slider owl-carousel">
+                    <div class="col-lg-4" th:each="product : ${products}">
+                        <div class="product__discount__item">
+                            <div class="product__discount__item__pic set-bg"
+                             th:data-setbg="@{'/img/' + ${product.image1}}">
+                                <div class="product__discount__percent" th:text="${product.sale_product +'%'}"></div>
+                                <ul class="product__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a th:href="@{/myshop/detail/{id}(id=${product.id_product})}"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                                <h5><a href="#" th:text="${product.name_product}"></a></h5>
+                                <ul>
+                                    <li class="start"><i class="fa-regular fa-star"></i></i></li>
+                                    <li  class="start"><i class="fa-regular fa-star"></i></i></li>
+    
+                                    <li  class="start"><i class="fa-regular fa-star"></i></i></li>
+    
+                                    <li  class="start"><i class="fa-regular fa-star"></i></i></li>
+                                    <li  class="start"><i class="fa-regular fa-star"></i></i></li>
+                                   </ul>
+                                <span style="font-weight: 630;
+                                font-size: 18px;
+                                color: #79a206;" class="price_sale" th:text="${product.price_sale}"> </span>
+                                
+                                <span style="text-decoration: line-through;
+                                font-weight: 400;
+                                font-size: 12px;
+                                margin-left: 5px; " class="price_old"th:text="${product.price_product}" ></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</section>
+</body>
+
+</html>

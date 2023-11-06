@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./layout/admin.html}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Quản lý hóa đơn</title>
+</head>
+
+<body>
+	<div layout:fragment="content" class="content-wrapper">
+		<div>
+			<!-- Content Header (Page header) -->
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-4">
+							<!--							<h1 class="m-0">Bảng danh mục</h1>
+-->
+						</div><!-- /.col -->
+						<div class="col-sm-4">
+							<input type="search"
+								style="border-radius: 10px; border-color: floralwhite; width: 100%; height: 93%;"
+								placeholder="Tìm kiếm tại đây">
+						</div>
+						<div class="col-sm-4">
+							<!--<a href="{{ route('category.create') }}" class="btn btn-success float-right">Thêm danh mục
+								mới</a>-->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.container-fluid -->
+			</div>
+			<!-- /.content-header -->
+
+			<!--<?php
+    $message = Session::get('msg');
+    if($message){
+      echo ' 
+      <div class="alert alert-success">
+      <span class="text-alert">'.$message.'</span>
+      </div>
+      ';
+      Session::put('msg',null);
+    }
+    ?>-->
+			<!-- Main content -->
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Tên khách hàng</th>
+									<th scope="col">SĐT</th>
+									<th scope="col">Đại chỉ</th>
+									<th scope="col">Ngày đặt hàng</th>
+									<th scope="col">Tổng tiền</th>
+									<th scope="col">Trạng thái</th>
+									<th scope="col">Thao tác</th>
+
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="order : ${orders} ">
+									<td th:text="${order.name_user}"></td>
+									<td th:text="${order.phone}"></td>
+									<td th:text="${order.address}"></td>
+									<td th:text="${order.date}"></td>
+
+									<td th:text="${order.total}"></td>
+									<td th:text="${order.status == '0' ? 'Chưa xét duyệt' : 'Đã xét duyệt'}"></td>
+									<td>
+										<a th:href="@{/admin/order/detail/{id}(id=${order.id_order})}"
+											type="button" style="background-color:#11741e; " class="btn btn-success">Chi
+											tiết</a>
+										<a href="{{ route('order.duyet',['id'=> $orders->id_order]) }}" type="button"
+											style="background-color:#f6c23e; " class="btn btn-success"
+											th:text="${order.status == '0' ? 'Duyệt' : 'Đã duyệt'}">
+
+										</a>
+										<a href="{{ route('order.delete',['id'=> $orders->id_order]) }}"
+											onclick="return confirm('Bạn có chắn chắn muốn xóa?');" type="button"
+											style="background-color:red; " class="btn btn-success">Xóa</a>
+									</td>
+
+								</tr>
+
+							</tbody>
+						</table>
+						<div class="col-md-12">
+							<ul class="pagination">
+								<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+									<a class="page-link" th:href="@{'/myshop/page/' + (${currentPage}-1)}">&laquo;</a>
+								</li>
+								<span th:each="i: ${#numbers.sequence(1, totalPage)}">
+									<li class="page-item" th:classappend="${currentPage == i} ? 'active'">
+										<a class="page-link" th:href="@{'/admin/order/page/' + ${i}}" th:text="${i}"></a>
+									</li>
+								</span>
+								<li class="page-item" th:classappend="${currentPage == totalPage} ? 'disabled'">
+									<a class="page-link" th:href="@{'/admin/order/page/' + (${currentPage}+1)}">&raquo;</a>
+								</li>
+							</ul>
+						</div>
+						<!-- /.col-md-6 -->
+					</div>
+					<!-- /.row -->
+				</div><!-- /.container-fluid -->
+			</div>
+			<!-- /.content -->
+		</div>
+
+	</div>
+</body>
+
+</html>

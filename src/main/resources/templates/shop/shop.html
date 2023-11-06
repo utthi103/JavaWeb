@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{/layout/user.html}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Trang chủ</title>
+</head>
+
+<body>
+
+	<div layout:fragment="slidebar">
+		<div class="bd-example">
+			<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+				<ol class="carousel-indicators">
+					<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+					<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+				</ol>
+				<div class="carousel-inner" role="listbox">
+					<div class="carousel-item active">
+						<img class="d-block w-100" src="/img/slide1.png" alt="First slide">
+						<div class="carousel-caption d-none d-md-block">
+							<h3 style="font-size: 54px;">BIG SALE</h3>
+							<p style="color:  #79a206;">Disscount 20% off</p>
+							<a href="/myshop" class="button">Shop Now</a>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" src="/img/slide2.png" alt="Second slide">
+						<div class="carousel-caption d-none d-md-block">
+							<h3 style="font-size: 54px;">TOP SALE</h3>
+							<p style="color:  #79a206;">Disscount 20% off</p>
+							<a href="/myshop" class="button">Shop Now</a>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" src="/img/slide3.png" alt="Second slide">
+						<div class="carousel-caption d-none d-md-block">
+							<h3 style="font-size: 54px;">LOVELY PLANTS</h3>
+							<p style="color:  #79a206;">Disscount 20% off</p>
+							<a href="/myshop" class="button">Shop Now</a>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+
+	<section layout:fragment="content" class="product spad">
+		<div class="shipping_area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-6">
+						<div class="single_shipping">
+							<div class="shipping_icone">
+								<img src="/img/shiping.png" alt="">
+							</div>
+							<div class="shipping_content">
+								<h3>Free Delivery</h3>
+								<p>Free shipping around the world for all <br> orders over $120</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="single_shipping col_2">
+							<div class="shipping_icone">
+								<img src="/img/shipping2.png" alt="">
+							</div>
+							<div class="shipping_content">
+								<h3>Safe Payment</h3>
+								<p>With our payment gateway, don’t worry <br> about your information</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="single_shipping col_3">
+							<div class="shipping_icone">
+								<img src="/img/shipping3.png" alt="">
+							</div>
+							<div class="shipping_content">
+								<h3>Friendly Services</h3>
+								<p>You have 30-day return guarantee for <br> every single order</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="banner_area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+						<figure class="single_banner">
+							<div class="banner_thumb">
+								<a href="/myshop"><img src="/img/banner1.png"
+										alt=""></a>
+								<div class="banner_content">
+									<h3>Big Sale Products</h3>
+									<h2>Plants <br> For Interior</h2>
+									<a href="/myshop">Shop Now</a>
+								</div>
+							</div>
+						</figure>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<figure class="single_banner">
+							<div class="banner_thumb">
+								<a href="/myshop"><img src="img/banner2.png"
+										alt=""></a>
+								<div class="banner_content">
+									<h3>Top Products</h3>
+									<h2>Plants <br> For Healthy</h2>
+									<a href="/myshop">Shop Now</a>
+								</div>
+							</div>
+						</figure>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section class="related-product">
+
+			<div class="col-lg-11 col-md-12">
+				<div class="product__discount" style="margin-left: 10%;">
+					<div class="section-title product__discount__title">
+						<h2>Sản phẩm mới</h2>
+					</div>
+					<div class="row">
+						<div class="product__discount__slider owl-carousel">
+							<div class="col-lg-4" th:each="newProduct : ${newProductList}">
+								<div class="product__discount__item">
+									<div class="product__discount__item__pic set-bg"
+										th:data-setbg="@{'/img/' + ${newProduct.image1}}">
+										<div class="product__discount__percent" th:text="${newProduct.sale_product +'%'}">
+										</div>
+										<ul class="product__item__pic__hover">
+											<li><a href="#"><i class="fa fa-heart"></i></a></li>
+											<li><a
+													th:href="@{/myshop/detail/{id}(id=${newProduct.id_product})}"><i
+														class="fa fa-retweet"></i></a></li>
+											<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+										</ul>
+									</div>
+									<div class="product__discount__item__text">
+										<h5><a href="#"th:text="${newProduct.name_product}" ></a></h5>
+										<ul>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+										</ul>
+										<span style="font-weight: 630;
+                                font-size: 18px;
+                                color: #79a206;" class="price_sale" th:text="${newProduct.price_sale}">
+										</span>
+
+										<span style="text-decoration: line-through;
+                                font-weight: 400;
+                                font-size: 12px;
+                                margin-left: 5px; " class="price_old" th:text="${newProduct.price_product}"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="col-lg-11 col-md-12">
+					<div class="product__discount" style="margin-left: 10%;">
+					<div class="section-title product__discount__title">
+						<h2>Sản phẩm nổi bật</h2>
+					</div>
+					<div class="row">
+						<div class="product__discount__slider owl-carousel">
+							<div class="col-lg-4" th:each="highlightedProduct : ${getHighlightedPdList}">
+								<div class="product__discount__item">
+									<div class="product__discount__item__pic set-bg"
+										th:data-setbg="@{'/img/' + ${highlightedProduct.image1}}">
+										<div class="product__discount__percent" th:text="${highlightedProduct.sale_product +'%'}">
+										</div>
+										<ul class="product__item__pic__hover">
+											<li><a href="#"><i class="fa fa-heart"></i></a></li>
+											<li><a
+													th:href="@{/myshop/detail/{id}(id=${highlightedProduct.id_product})}"><i
+														class="fa fa-retweet"></i></a></li>
+											<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+										</ul>
+									</div>
+									<div class="product__discount__item__text">
+										<h5><a href="#"th:text="${highlightedProduct.name_product}" ></a></h5>
+										<ul>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+										</ul>
+										<span style="font-weight: 630;
+                                font-size: 18px;
+                                color: #79a206;" class="price_sale" th:text="${highlightedProduct.price_sale}">
+										</span>
+
+										<span style="text-decoration: line-through;
+                                font-weight: 400;
+                                font-size: 12px;
+                                margin-left: 5px; " class="price_old" th:text="${highlightedProduct.price_product}"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<section class="from-blog spad">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="section-title from-blog__title">
+								<h2>Bài viết</h2>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-6" th:each="blog : ${blogList}" >
+							<div class="blog__item">
+								<div class="blog__item__pic">
+									<img th:src="@{'/img/' + ${blog.image}}" alt="" width="200px">
+								</div>
+								<div class="blog__item__text">
+									<ul>
+										<li th:text="${blog.date}"><i class="fa fa-calendar-o"></i></li>
+									</ul>
+									<h5><a href="#" th:text="${blog.category}"></a></h5>
+									<p th:text="${blog.title}" </p>
+								</div>
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+			</section>
+		</section>
+</body>
+
+</html>
