@@ -73,12 +73,12 @@
 										<a th:href="@{/admin/order/detail/{id}(id=${order.id_order})}"
 											type="button" style="background-color:#11741e; " class="btn btn-success">Chi
 											tiết</a>
-										<a href="{{ route('order.duyet',['id'=> $orders->id_order]) }}" type="button"
+										<a th:href="@{/admin/order/accpect/{id}(id=${order.id_order})}" type="button"
 											style="background-color:#f6c23e; " class="btn btn-success"
 											th:text="${order.status == '0' ? 'Duyệt' : 'Đã duyệt'}">
 
 										</a>
-										<a href="{{ route('order.delete',['id'=> $orders->id_order]) }}"
+										<a th:href="@{/admin/order/delete/{id}(id=${order.id_order})}"
 											onclick="return confirm('Bạn có chắn chắn muốn xóa?');" type="button"
 											style="background-color:red; " class="btn btn-success">Xóa</a>
 									</td>

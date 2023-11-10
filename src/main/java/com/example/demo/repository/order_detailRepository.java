@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.Entity.order_detail;
 
-public interface order_detailRepository extends JpaRepository<order_detail, Integer> {
+public interface order_detailRepository extends JpaRepository<order_detail, Long> {
 
 	List<order_detail> findByIdOrder(int orderId);
 

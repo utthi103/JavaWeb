@@ -8,10 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Entity
 public class order_detail {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	  @Id 
+//	   @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 	private int id_product;
+	  
 	private int idOrder;
-	private int id_product;
+	
 	private String name_product;
 	private int count;
 	private Float price;

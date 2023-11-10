@@ -31,10 +31,16 @@ public class orderService {
 		return this.orderRepository.findAll(pageable);
 	}
 	
-//	detail
-//	public order getOrderById(int orderId) {
-//	    Optional<order> orderOptional = orderRepository.findById(orderId);
-//	    return orderOptional.orElse(null);
-//	}
+//delete order
+	public void deleteOrder(int idOrder) {
+		orderRepository.deleteById(idOrder);;
+	}
 	
+	public void updateOrderStatus(int orderId) {
+        order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid order id: " + orderId));
+
+        order.setStatus("1");
+        orderRepository.save(order);
+    }	
 }

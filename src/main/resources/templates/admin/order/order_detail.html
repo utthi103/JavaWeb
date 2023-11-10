@@ -49,14 +49,12 @@
             </thead>
             <tbody>
                    <tr th:each="orderDetail: ${orderwithID}">
-                <td th:text="orderDetail.name_product"></td>
-                  <td>{{ $order_detail->count }}</td>
-                  <td><?php
-                  echo $order_detail->price/$order_detail->count;
-                  ?></td>
-                  <td>{{ $order_detail->price }}</td>
+                <td th:text="${orderDetail.name_product}"></td>
+                  <td  th:text="${orderDetail.count}"></td>
+                  <td th:text="${orderDetail.price div orderDetail.count}"></td>
+                  <td th:text="${orderDetail.price}"></td>
 
-              @endforeach
+            
              
               </tr>
              

@@ -1,15 +1,17 @@
 package com.example.demo.Entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Entity
-public class category {
+public class category implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_category;
-	private String name_category;
+	public String nameCategory;
 	private String note;
 	public category() {
 		super();
@@ -22,10 +24,10 @@ public class category {
 		this.id_category = id_category;
 	}
 	public String getName_category() {
-		return name_category;
+		return nameCategory;
 	}
-	public void setName_category(String name_category) {
-		this.name_category = name_category;
+	public void setName_category(String nameCategory) {
+		this.nameCategory = nameCategory;
 	}
 	public String getNote() {
 		return note;
