@@ -16,8 +16,8 @@ public class user {
 	private String phone;
 	private String email_user;
 	private String address_user;
-	private String account_user;
-	private String pass_user;
+	private String accountUser;
+	private String passUser;
 	private int id_auth;
 	private String avt;
 	public user() {
@@ -66,17 +66,17 @@ public class user {
 	public void setAddress_user(String address_user) {
 		this.address_user = address_user;
 	}
-	public String getAccount_user() {
-		return account_user;
+	public String getAccountUser() {
+		return accountUser;
 	}
-	public void setAccount_user(String account_user) {
-		this.account_user = account_user;
+	public void setAccountUser(String accountUser) {
+		this.accountUser = accountUser;
 	}
-	public String getPass_user() {
-		return pass_user;
+	public String getPassUser() {
+		return passUser;
 	}
-	public void setPass_user(String pass_user) {
-		this.pass_user = pass_user;
+	public void setPassUser(String passUser) {
+		this.passUser = passUser;
 	}
 	public int getId_auth() {
 		return id_auth;

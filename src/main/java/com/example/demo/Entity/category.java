@@ -10,18 +10,18 @@ import javax.persistence.Id;
 public class category implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_category;
+	public int idCategory;
 	public String nameCategory;
-	private String note;
+	public String note;
 	public category() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getId_category() {
-		return id_category;
+	public int getidCategory() {
+		return idCategory;
 	}
-	public void setId_category(int id_category) {
-		this.id_category = id_category;
+	public void setidCategory(int idCategory) {
+		this.idCategory = idCategory;
 	}
 	public String getName_category() {
 		return nameCategory;
@@ -36,5 +36,8 @@ public class category implements Serializable{
 		this.note = note;
 	}
 	
-	
+	  public void updateCategory(String newName, String newNote) {
+	        this.nameCategory = newName;
+	        this.note = newNote;
+	    }
 }

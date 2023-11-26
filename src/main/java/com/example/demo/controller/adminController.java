@@ -1,17 +1,22 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Entity.order;
 import com.example.demo.Entity.order_detail;
+import com.example.demo.Entity.product;
 import com.example.demo.Entity.user;
 import com.example.demo.Entity.category;
 
@@ -28,8 +33,8 @@ public class adminController {
 	private categoryService categoryService;
 
 	@Autowired
-	public adminController(orderService orderService, order_detailServicce order_detailServicce,userService userService,
-			categoryService categoryService) {
+	public adminController(orderService orderService, order_detailServicce order_detailServicce,
+			userService userService, categoryService categoryService) {
 		this.orderService = orderService;
 		this.order_detailService = order_detailServicce;
 		this.userService = userService;
@@ -65,45 +70,43 @@ public class adminController {
 		return "admin/order/order_detail";
 	}
 //	delete order
-	
+
 	@GetMapping("/admin/order/delete/{id}")
-	public String deleteOrder(@PathVariable("id") int orderID,RedirectAttributes redirectAttributes) {
-		 orderService.deleteOrder(orderID);
-		 redirectAttributes.addFlashAttribute("message", "Order deleted successfully");
-		 return "redirect:/admin/order";
+	public String deleteOrder(@PathVariable("id") int orderID, RedirectAttributes redirectAttributes) {
+		orderService.deleteOrder(orderID);
+		redirectAttributes.addFlashAttribute("message", "Order deleted successfully");
+		return "redirect:/admin/order";
 	}
-	
+
 	@GetMapping("/admin/order/accpect/{id}")
 	public String accpectOrder(@PathVariable("id") int orderID) {
 		orderService.updateOrderStatus(orderID);
 		return "redirect:/admin/order";
 	}
-	
+
 //	manage user
-	
+
 	@GetMapping("/admin/user")
 	public String user(Model model) {
 		List<user> user = userService.getAllBlog();
 		model.addAttribute("user", user);
 		return "admin/user";
 	}
-	
 
 	@GetMapping("/admin/user/delete/{id}")
-	public String deleteUser(@PathVariable("id") int userId,RedirectAttributes redirectAttributes) {
-		 userService.deleteUser(userId);
-		 redirectAttributes.addFlashAttribute("message", "Order deleted successfully");
-		 return "redirect:/admin/user";
+	public String deleteUser(@PathVariable("id") int userId, RedirectAttributes redirectAttributes) {
+		userService.deleteUser(userId);
+		redirectAttributes.addFlashAttribute("message", "Order deleted successfully");
+		return "redirect:/admin/user";
 	}
-	
-	
+
 //	manage category
 	/*
 	 * @GetMapping("/admin/category") public String category(Model model) {
 	 * List<category> category = categoryService.getAllCategory();
 	 * model.addAttribute("category", category); return "admin/category/category"; }
 	 */
-	
+
 	@GetMapping("/admin/category")
 	public String category(Model model) {
 
@@ -117,7 +120,7 @@ public class adminController {
 		long totalItem = page.getTotalElements();
 //		List<category> cateList = page.getContent();
 		List<category> category = page.getContent();
-		 model.addAttribute("category", category);
+		model.addAttribute("category", category);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("totalItem", totalItem);
@@ -126,11 +129,45 @@ public class adminController {
 		return "admin/category/category";
 	}
 
+	@GetMapping("/admin/category/delete/{id}")
+	public String deleteCate(@PathVariable("id") int cateID, RedirectAttributes redirectAttributes) {
+		categoryService.deleteCate(cateID);
+		redirectAttributes.addFlashAttribute("message", "Order deleted successfully");
+		return "redirect:/admin/category";
+	}
+
+//	  edit category
+	@GetMapping("/admin/category/formedit/{id}")
+	public String formeditCate(Model model,@PathVariable("id") int cateId) {
+		 category catewithID = categoryService.getCateById(cateId);
+		 model.addAttribute("catewithID", catewithID);
+		return "admin/category/edit";
+	}
 	
-	  @GetMapping("/admin/category/delete/{id}") public String
-	  deleteCate(@PathVariable("id") int cateID,RedirectAttributes
-	  redirectAttributes) { categoryService.deleteCate(cateID);
-	  redirectAttributes.addFlashAttribute("message",
-	  "Order deleted successfully"); return "redirect:/admin/category"; }
-	 
+	@PostMapping("/admin/category/edit/{cateID}")
+    public String updateCategory(
+            @PathVariable("cateID") int categoryId,
+            @RequestParam("name_category") String newName,
+            @RequestParam("note_category") String newNote) {
+        categoryService.updateCategory(categoryId, newName, newNote);
+
+        return "redirect:/admin/category";
+    }
+	
+	@GetMapping("/admin/category/formAdd")
+	public String forAddCate() {
+		return "admin/category/add";
+	}
+		
+	@PostMapping("/admin/category/add")
+    public String addCate(
+            @RequestParam("name_category") String newName,
+            @RequestParam("note_category") String newNote) {
+		 category category = new category();
+//		    category.setName_category(newName);
+//		    category.setNote(newNote);
+		    categoryService.addCategory(category,newName,newNote);
+
+        return "redirect:/admin/category";
+    }
 }

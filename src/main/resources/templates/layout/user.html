@@ -23,6 +23,9 @@
 	<link rel="stylesheet" href="/css/style.css" type="text/css">
 	<link rel="stylesheet" href="/css/sweetalert.css" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
 </head>
 
@@ -51,18 +54,18 @@
 
 							<div class="header__top__right__auth">
 								<div class="dropdown" style="">
-									<a href="#"><i class="fa fa-user"></i> </a>
-
-									<div class="dropdown-content" style="">
-										<a href="{{URL::to('/myaccount')}}"> Tài khoản</a>
-										<a href="{{URL::to('/history')}}"> Lịch sử</a>
-										<a href="{{URL::to('/user-logout')}}">Đăng xuất</a>
+									<a href="#">
+										<i class="fa fa-user"></i>
+										<span th:text="${session.username} ?: 'Xin chao'"></span>
+									</a>
+									<div class="dropdown-content" style="" th:if="${session.username != null}">
+										<a th:href="@{/myaccount}">Tài khoản</a>
+										<a th:href="@{/history}">Lịch sử</a>
+										<a th:href="@{/user/logout}">Đăng xuất</a>
 									</div>
-
-									<div class="dropdown-content" style="">
-										<a href="{{URL::to('/form_signin')}}"> Đăng nhập</a>
+									<div class="dropdown-content" style="" th:unless="${session.username != null}">
+										<a th:href="@{/user}">Đăng nhập</a>
 									</div>
-
 								</div>
 
 							</div>
@@ -100,7 +103,7 @@
 						<ul>
 							<li><a href=" {{URL::to('/show_wishlist')}} "><i class="fa fa-heart"></i> <span></span></a>
 							</li>
-							<li><a href="{{ route('product.cart') }}"><i class="fa fa-shopping-bag"></i>
+							<li><a href="/show_cart"><i class="fa fa-shopping-bag"></i>
 									<span>></span></a></li>
 						</ul>
 						<div class="header__cart__price">Tổng: <span></span></div>
@@ -163,7 +166,7 @@
 	</section>
 
 	<div layout:fragment="slidebar"></div>
-	
+
 	<section layout:fragment="content">
 
 	</section>
@@ -254,6 +257,53 @@
 	<script src="/js/mixitup.min.js"></script>
 	<script src="/js/owl.carousel.min.js"></script>
 	<script src="/js/main.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.add_to_cart').click(function () {
+				var id_product = $(this).data('id_product');
+				var name_product = $('.cart_product_name_' + id_product).val();
+				var img_product = $('.cart_product_img_' + id_product).val();
+				var price_product = $('.cart_product_price_sale_' + id_product).val();
+
+				var count = $('.cart_product_count_' + id_product).val();
+				var _token = $('input[name="_token"]').val();
+				var qty = $('.cart_product_qty_' + id_product).val();
+
+				var kt = "true";
+				$.ajax({
+					url: '/add_to_cart',
+					method: 'POST',
+					contentType: 'application/json', // đặt loại nội dung
+					data: JSON.stringify({
+						id_product: id_product,
+						name_product: name_product,
+						img_product: img_product,
+						price_product: price_product,
+						count: count,
+						_token: _token,
+						qty: qty
+					}),
+					success: function (data) {
+						//	alert(data);
+						swal({
+							title: "Đã thêm sản phẩm vào giỏ hàng",
+							text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+							showCancelButton: true,
+							cancelButtonText: "Xem tiếp",
+							confirmButtonClass: "btn-success",
+							confirmButtonText: "Đi đến giỏ hàng",
+							closeOnConfirm: false
+						},
+							function () {
+								window.location.href = "/show_cart";
+							});
+					}
+				});
+
+			});
+		});
+
+	</script>
 
 </body>
 

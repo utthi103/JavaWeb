@@ -24,4 +24,11 @@ public class userService {
 	   public void deleteUser(int idUser) {
 			userRepository.deleteById(idUser);;
 		}
+	   
+	   public user isValidUser(String username, String password) {
+		    user user = userRepository.findByAccountUserAndPassUser(username, password);
+		    return user;
+		}
+	   
+	   
 }
