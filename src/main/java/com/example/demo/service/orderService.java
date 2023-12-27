@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Entity.category;
 import com.example.demo.Entity.order;
 import com.example.demo.Entity.product;
 import com.example.demo.repository.orderRepository;
@@ -43,4 +44,26 @@ public class orderService {
         order.setStatus("1");
         orderRepository.save(order);
     }	
+	  public void addOrder(order order, 
+			 int  id_user,
+			  String first_name,
+			 String last_name,
+			 String phone,
+			  String address, 
+			  String pay,
+			  Float total,
+			  String status,
+			  String order_note
+			  ) {
+		  String name_user =first_name +" "+ last_name;
+		  	order.setId_user(id_user);
+		  	order.setName_user(name_user);
+		  	order.setPhone(phone);
+		  	order.setAddress(address);
+		  	order.setPay(pay);
+		  	order.setTotal(total);
+		  	order.setStatus(status);
+		  	order.setOrder_note(order_note);
+	        orderRepository.save(order);
+	    }
 }

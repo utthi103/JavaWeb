@@ -104,9 +104,12 @@
 							<li><a href=" {{URL::to('/show_wishlist')}} "><i class="fa fa-heart"></i> <span></span></a>
 							</li>
 							<li><a href="/show_cart"><i class="fa fa-shopping-bag"></i>
-									<span>></span></a></li>
+									<span th:text="${session.numberOfItemsInCart} ?: '0'"></span>
+									</a></li>
 						</ul>
-						<div class="header__cart__price">Tổng: <span></span></div>
+						<div class="header__cart__price">Tổng: 
+							<span th:text="${session.total} ?: '0'"></span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -234,11 +237,10 @@
 				<div class="col-lg-12">
 					<div class="footer__copyright">
 						<div class="footer__copyright__text">
-							<p> Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+							<p>
 								Copyright &copy;
 								<script>document.write(new Date().getFullYear());</script> Trường Đại học Công nghệ
 								Thông tin và Truyền thông Việt - Hàn
-								Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
 							</p>
 						</div>
 						<div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
@@ -295,7 +297,7 @@
 							closeOnConfirm: false
 						},
 							function () {
-								window.location.href = "/show_cart";
+							window.location.href = '/show_cart';
 							});
 					}
 				});

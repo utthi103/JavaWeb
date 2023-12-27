@@ -76,6 +76,9 @@ public class shopController {
 		public String logout(HttpSession session) {
 			 session.setAttribute("username", null);
 			 session.setAttribute("idUser", null);
+			 session.setAttribute("total", null);
+			 session.setAttribute("numberOfItemsInCart", null);
+			 session.setAttribute("cart", null);
 			return "redirect:/";
 		}
 		        

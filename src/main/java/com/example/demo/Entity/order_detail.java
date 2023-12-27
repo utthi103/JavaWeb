@@ -6,14 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 @Entity
+@IdClass(OrderDetailId.class)
 public class order_detail {
-	
-	  @Id 
-//	   @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 	private int id_product;
-	  
-	private int idOrder;
+	 @Id
+	    private int idOrder; // Khóa ngoại tham chiếu đến order_table
+
+	    @Id
+	    private int id_product;
 	
 	private String name_product;
 	private int count;

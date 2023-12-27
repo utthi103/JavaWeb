@@ -15,7 +15,7 @@ import java.util.Date;
 public class product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_product;
+    public int id_product;
 
     private String name_product;
     
@@ -49,11 +49,11 @@ public class product {
         super();
     }
 
-    public int getId_product() {
+    public int getid_product() {
         return id_product;
     }
 
-    public void setId_product(int id_product) {
+    public void setid_product(int id_product) {
         this.id_product = id_product;
     }
 
