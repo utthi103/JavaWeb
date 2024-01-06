@@ -63,7 +63,7 @@
 					<div class="shoping__cart__table">
 
 
-						<form action="{{ URL::to('/update_cart') }}" method="POST">
+						<form th:action="@{/updateCart}" method="POST">
 
 
 							<table class="table table-bordered" style="	table-layout:fixed;
@@ -88,13 +88,14 @@
 											<h5 th:text="${cart.name_product}"></h5>
 										</td>
 										<td class="shoping__cart__price">
-											<span th:text="${cart.price_product}"></span>
+											<span th:text="(${cart.price_product}) + '$'"></span>
 										</td>
 										<td class="shoping__cart__quantity" style="vertical-align: middle;">
 											<div class="quantity">
 												<div class="pro-qty">
-													<input type="text" th:value="${cart.qty}"
-														name="qty_product[${cart.session_id}]">
+												<input type="text" th:value="${cart.qty}" 
+												th:name="'qty_product[' + ${cart.session_id} + ']'" />
+														<!--name="qty_product[${cart.session_id}]">-->	
 												</div>
 											</div>
 										</td>
@@ -121,10 +122,10 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="shoping__cart__btns">
-						<a th:href="@{/myshop}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+						<a th:href="@{/myshop}" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
 						<button style="border-color: white;" type="submit"
 							class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-							Upadate Cart</button>
+							Cập nhật giỏ hàng</button>
 					</div>
 					</form>
 				</div>

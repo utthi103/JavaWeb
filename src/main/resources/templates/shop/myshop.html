@@ -144,7 +144,7 @@
 										<div class="product__discount__percent" th:text="${product.sale_product +'%'}">
 										</div>
 										<ul class="product__item__pic__hover">
-											<li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    		<li><a type="button" th:data-id_product="${product.id_product}" class="add_to_wishlist"><i class="fa fa-heart"></i></a></li>
 											<li><a th:href="@{/myshop/detail/{id}(id=${product.id_product})}"><i
 														class="fa fa-retweet"></i></a></li>
 											<li><a type="button" th:data-id_product ="${product.id_product}" class="add_to_cart" ><i

@@ -101,13 +101,13 @@
 					<div class="header__cart">
 
 						<ul>
-							<li><a href=" {{URL::to('/show_wishlist')}} "><i class="fa fa-heart"></i> <span></span></a>
+							<li><a href="/show_wishlist"><i class="fa fa-heart"></i> <span th:text="${session.numberOfItemsInWish} ?: '0'"></span></a>
 							</li>
 							<li><a href="/show_cart"><i class="fa fa-shopping-bag"></i>
 									<span th:text="${session.numberOfItemsInCart} ?: '0'"></span>
-									</a></li>
+								</a></li>
 						</ul>
-						<div class="header__cart__price">Tổng: 
+						<div class="header__cart__price">Tổng:
 							<span th:text="${session.total} ?: '0'"></span>
 						</div>
 					</div>
@@ -297,7 +297,54 @@
 							closeOnConfirm: false
 						},
 							function () {
-							window.location.href = '/show_cart';
+								window.location.href = '/show_cart';
+							});
+					}
+				});
+
+			});
+		});
+
+
+		<!--add to wishlist-->
+			$(document).ready(function () {
+			$('.add_to_wishlist').click(function () {
+				var id_product = $(this).data('id_product');
+				var name_product = $('.cart_product_name_' + id_product).val();
+				var img_product = $('.cart_product_img_' + id_product).val();
+				var price_product = $('.cart_product_price_sale_' + id_product).val();
+
+				var count = $('.cart_product_count_' + id_product).val();
+				var _token = $('input[name="_token"]').val();
+				var qty = $('.cart_product_qty_' + id_product).val();
+
+				var kt = "true";
+				$.ajax({
+					url: '/add_to_wishlist',
+					method: 'POST',
+					contentType: 'application/json', // đặt loại nội dung
+					data: JSON.stringify({
+						id_product: id_product,
+						name_product: name_product,
+						img_product: img_product,
+						price_product: price_product,
+						count: count,
+						_token: _token,
+						qty: qty
+					}),
+					success: function (data) {
+						//	alert(data);
+						swal({
+							title: "Đã thêm sản phẩm vào danh sách yêu thích",
+							text: "Bạn có thể mua hàng tiếp hoặc tới xem danh sách yêu thích",
+							showCancelButton: true,
+							cancelButtonText: "Xem tiếp",
+							confirmButtonClass: "btn-success",
+							confirmButtonText: "Đi đến danh sách yêu thích",
+							closeOnConfirm: false
+						},
+							function () {
+							window.location.href = '/show_wishlist';
 							});
 					}
 				});
