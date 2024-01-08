@@ -9,7 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 //@Embeddable
-public class OrderDetailId implements Serializable {
+
+public class OrderDetail implements Serializable {
 
 	 private int idOrder;
 	    public int getIdOrder() {

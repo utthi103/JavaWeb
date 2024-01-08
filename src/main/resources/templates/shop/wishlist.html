@@ -91,12 +91,12 @@
 									<span th:text="(${wishlist.price_product}) + '$'"></span>
                                 </td>
                                 <td class="shoping__cart__quantity" style="vertical-align: middle;">
-                                    <a href="{{ route('product.detail',['id'=> $wishlist['id_product']]) }}"
+                                    <a href="@{/myshop/detail/{id}(id=${wishlist.id_product})}"
                                     style="    background: #79a206;  font-size: 12px;  font-weight: 500;  height: 38px;  line-height: 18px;  padding: 10px 20px;  color: #ffffff;  text-transform: uppercase;  border-radius: 3px;    cursor: pointer;">
-                                        Xem chi tiet</a>
+                                        Xem chi tiết</a>
                                 </td>
                                 <td class="shoping__cart__item__close" style="line-height: 120px; text-align: center">
-                                    <a th:href="@{/deleteCart/{sessionId}(sessionId=${wishlist.session_id})}"><span style="color: #23711a;" class="fa-solid fa-xmark"></span></i></a>
+                                    <a th:href="@{/deleteWish/{sessionId}(sessionId=${wishlist.session_id})}"><span style="color: #23711a;" class="fa-solid fa-xmark"></span></i></a>
                                    
                                 </td>
                             </tr> 

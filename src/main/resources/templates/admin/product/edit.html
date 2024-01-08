@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./layout/admin.html}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Sửa sản phẩm</title>
+</head>
+
+<body>
+	<div layout:fragment="content" class="content-wrapper">
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<div>
+							<i class="fa-solid fa-paperclip" style="color: cadetblue; font-size: 20px;"></i>
+							<a href="{{ route('category.tabletype') }}" style="font-size: 22px;">Bảng sản phẩm</a>
+						</div>
+
+					</div><!-- /.col -->
+					<div class="col-sm-6">
+						<a href="{{ route('category.create') }}" class="btn btn-success float-right">Thêm danh mục
+							mới</a>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+
+		<!-- Main content -->
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12" style="margin: 0 auto;">
+						<form th:action="@{/admin/product/edit/{productID}(productID=${productwithID.id_product})}"
+							method="POST" enctype="multipart/form-data" style="border-style: groove; border-color: lime;background: white;">
+
+							<div class="form-group">
+								<label for="cars">Loại sản phẩm: </label>
+								<select id="" name="name_category" class="form-control">
+									<option th:each="category : ${categories}"
+										th:selected="${category.nameCategory == nameCate}"
+										th:value="${category.nameCategory}" th:text="${category.nameCategory}">
+									</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="">Tên sản phẩm</label>
+								<input type="text" th:value="${productwithID.name_product}" class="form-control"
+									id="name_product" placeholder="" name="name_product">
+							</div>
+							<div class="form-group">
+								<label for="">Giá</label>
+								<input type="text" th:value="${productwithID.price_product}" class="form-control"
+									id="price_product" placeholder="" name="price_product">
+							</div>
+							<div class="form-group">
+								<label for="">Số lượng</label>
+								<input type="number" th:value="${productwithID.count_product}" class="form-control"
+									id="count_product" placeholder="" name="count_product">
+							</div>
+							<div class="form-group">
+								<label for="">Hình ảnh 1 </label>
+								<div style="display: -webkit-box;">
+									<input type="file" th:value="${productwithID.image1}" class="form-control"
+										id="image1" placeholder="" name="image1" style=" margin-right: 5px;" ssf>
+
+								</div>
+								<div style="margin: 5px;">
+									<img th:src="@{/img/{imageName}(imageName=${productwithID.image1})}" alt=""
+										width="100px">
+								</div>
+								<input type="hidden" th:value="${productwithID.image1}" name="image_old1">
+							</div>
+							<div class="form-group">
+								<label for="">Hình ảnh 2</label>
+								<div style="display: -webkit-box;">
+									<input type="file" th:value="${productwithID.image2}" class="form-control"
+										id="image2" placeholder="" name="image2" style=" margin-right: 5px;">
+
+								</div>
+								<div class="" style="margin: 5px;">
+									<img th:src="@{/img/{imageName}(imageName=${productwithID.image2})}" alt=""
+										width="100px">
+									<input type="hidden" th:value="${productwithID.image2}" name="image_old2">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="">Hình ảnh 3</label>
+								<div style="display: -webkit-box;">
+									<input type="file" th:value="${productwithID.image3}" class="form-control"
+										id="image3" placeholder="" name="image3" style=" margin-right: 5px;">
+
+								</div>
+								<div class="" style="margin: 5px;">
+									<img th:src="@{/img/{imageName}(imageName=${productwithID.image3})}" alt=""
+										width="100px">
+									<input type="hidden" th:value="${productwithID.image3}" name="image_old3">
+								</div>
+							</div>
+							<label for="">Mô tả ngắn</label>
+							<div class="form-group">
+								<textarea class="form-control" id="decription_product" placeholder=""
+									name="decription_product" th:text="${productwithID.decription_product}"></textarea>
+							</div>
+							<label for="">Mô tả sản phẩm</label>
+							<div class="form-group">
+								<textarea class="form-control" id="decription" placeholder="" name="decription"
+									th:text="${productwithID.decription}"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="">Sale</label>
+								<input type="text" th:value="${productwithID.sale_product}" class="form-control"
+									id="sale_product" placeholder="" name="sale_product">
+							</div>
+							<div class="form-group">
+								<label for="cars">Sản phẩm nổi bật</label>
+								<select id="outstand_product" name="outstand_product" class="form-control">
+									<option th:value="${productwithID.outstandProduct}" selected="selected"
+										th:text="${productwithID.outstandProduct}"></option>
+									<option th:text="${productwithID.outstandProduct == 'Không' ? 'Có' : 'Không'}">
+									</option>
+								</select>
+							</div>
+
+
+							<button type="submit" onclick="return confirm('Bạn có chắn chắn muốn sửa?');"
+								class="btn btn-primary"
+								style="margin: 10px; left: 30%; margin-left: 33%; width: 150px; background: darkcyan;">Edit</button>
+						</form>
+					</div>
+					<!-- /.col-md-6 -->
+				</div>
+				<!-- /.row -->
+			</div><!-- /.container-fluid -->
+		</div>
+	</div>
+</body>
+
+</html>

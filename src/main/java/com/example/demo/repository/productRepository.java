@@ -18,5 +18,10 @@ public interface productRepository extends JpaRepository<product, Integer > {
 	    product findById_product(@Param("id_product") int id_product);
     @Query("SELECT p FROM product p ORDER BY p.dateProduct DESC")
     List<product> findTop4ByOrderByDateProductDesc();
+    @Query("SELECT p FROM product p WHERE LOWER(p.name_product) LIKE LOWER(CONCAT('%', :nameProduct, '%'))")
+    List<product> findProductsByName(@Param("nameProduct") String nameProduct);
     
+    List<product> findByCategoryEntity_NameCategoryContaining(String nameProduct);
+    @Query("SELECT p FROM product p WHERE p.price_sale BETWEEN :minPrice AND :maxPrice")
+    List<product> findProductsByPriceSaleRange(@Param("minPrice") Float minPrice, @Param("maxPrice") Float maxPrice);
 }

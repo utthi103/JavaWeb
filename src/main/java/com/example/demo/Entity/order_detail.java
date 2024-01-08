@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 @Entity
-@IdClass(OrderDetailId.class)
+@IdClass(OrderDetail.class)
 public class order_detail {
 	 @Id
 	    private int idOrder; // Khóa ngoại tham chiếu đến order_table

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -75,5 +77,28 @@ public class wishlistController {
 
 		return redirect;
 	}
+	@GetMapping("/deleteWish/{id}")
+	public String deleteWish(@PathVariable("id") String wishlistID, HttpSession session) {
+		List<Map<String, Object>> wishlist = (List<Map<String, Object>>) session.getAttribute("wishlist");
+		System.err.println(wishlistID);
+		System.err.println("Before deletion: " + wishlist);
+
+		if (wishlist != null) {
+			Iterator<Map<String, Object>> iterator = wishlist.iterator();
+			while (iterator.hasNext()) {
+				Map<String, Object> item = iterator.next();
+				if (item.get("session_id").equals(wishlistID)) {
+					iterator.remove();
+					break;
+				}
+			}
+
+			session.setAttribute("wishlist", wishlist);
+			System.err.println("After deletion: " + wishlist);
+		}
+
+		return "redirect:/show_wishlist";
+	}
+	
 
 }

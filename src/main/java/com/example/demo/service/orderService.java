@@ -31,7 +31,6 @@ public class orderService {
 		Pageable pageable = PageRequest.of(pageNumber-1, 6);
 		return this.orderRepository.findAll(pageable);
 	}
-	
 //delete order
 	public void deleteOrder(int idOrder) {
 		orderRepository.deleteById(idOrder);;
@@ -65,5 +64,9 @@ public class orderService {
 		  	order.setStatus(status);
 		  	order.setOrder_note(order_note);
 	        orderRepository.save(order);
+	    }
+	  
+	  public List<order> findOrdersByIdUserAndStatus(int idUser, String status) {
+	        return orderRepository.findOrdersByIdUserAndStatus(idUser, status);
 	    }
 }

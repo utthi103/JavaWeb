@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./layout/admin.html}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Quản lý sản phẩm</title>
+</head>
+
+<body>
+	<div layout:fragment="content" class="content-wrapper">
+		 <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-4">
+            <h1 class="m-0">Bảng sản phẩm</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-4">
+            <input type="search" style="border-radius: 10px; border-color: floralwhite; width: 100%; height: 93%;" placeholder="Tìm kiếm tại đây">
+          </div>
+          <div class="col-sm-4">
+            <a th:href="@{/admin/product/formAdd}" class="btn btn-success float-right">Thêm sản phẩm mới</a>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <!-- Main content -->
+   <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Loại sản phẩm</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Thao tác</th>
+                
+
+              </tr>
+            </thead>
+            <tbody>
+        
+            <tr  th:each="product : ${products} ">
+              <td  th:text="${product.id_product}"></td>
+              <td  th:text="${product.name_product}"></td>
+              <td th:text="${product.categoryEntity.nameCategory}"></td> 
+              <td th:text="${product.count_product}"></td>
+              <td th:text="${product.price_product}"></td> 
+                    <td style="text-align: center;">
+                     
+                      <img th:src="@{/img/{imageName}(imageName=${product.image1})}" alt="" width="100px">
+                    </td>
+                
+              <td>
+                <a th:href="@{/admin/product/show/{id}(id=${product.id_product})}" type="button" style="background-color:#f6c23e; " class="btn btn-success">Sửa </a>
+                <a th:href="@{/admin/product/delete/{id}(id=${product.id_product})}" onclick="return confirm('Bạn có thật sự muốn xóa ?');" type="button" style="background-color:red; "  class="btn btn-success">Xóa</a>
+              </td>
+            
+            </tr>
+            </tbody>
+          </table>
+          <div class="col-md-12">
+             <ul class="pagination">
+								<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+									<a class="page-link" th:href="@{'/admin/product/page/' + (${currentPage}-1)}">&laquo;</a>
+								</li>
+								<span th:each="i: ${#numbers.sequence(1, totalPage)}">
+									<li class="page-item" th:classappend="${currentPage == i} ? 'active'">
+										<a class="page-link" th:href="@{'/admin/product/page/' + ${i}}" th:text="${i}"></a>
+									</li>
+								</span>
+								<li class="page-item" th:classappend="${currentPage == totalPage} ? 'disabled'">
+									<a class="page-link" th:href="@{'/admin/product/page/' + (${currentPage}+1)}">&raquo;</a>
+								</li>
+							</ul>
+          </div>
+          <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+	</div>
+</body>
+
+</html>

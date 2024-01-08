@@ -31,7 +31,7 @@ public class product {
     private String decription_product;
     private String decription;
     private int sale_product;
-    private String outstandProduct;
+    public String outstandProduct;
     private Date dateProduct;
 
 	public category getCategoryEntity() {
@@ -44,7 +44,7 @@ public class product {
 
 
 	private Float price_sale;
-
+ 
     public product() {
         super();
     }

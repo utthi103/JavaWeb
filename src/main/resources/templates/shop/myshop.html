@@ -63,7 +63,7 @@
 							<h4>Danh mục sản phẩm</h4>
 							<ul>
 								<li th:each="category : ${categories}">
-									<a th:href="@{'/product/listcategory?id=' + ${category.name_category}}"
+									<a  th:href="@{/myshop/search_category/{cateName}(cateName=${category.name_category})}"
 										th:text="${category.name_category}">
 
 									</a>
@@ -82,7 +82,7 @@
 								</div>
 								<div class="range-slider">
 									<div class="price-input">
-										<form action="{{ route('search.price') }}" style="display: flex" method="POST">
+										<form th:action="@{/myshop/search_price}" style="display: flex" method="POST">
 											<input type="text" id="minamount" name="min_price">
 											<input type="text" id="maxamount" name="max_price">
 											<br>
@@ -123,7 +123,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div th:each="product : ${products}" class="col-lg-4 col-md-6 col-sm-6">
+						<div th:if="${product != null}" th:each="product : ${products}" class="col-lg-4 col-md-6 col-sm-6">
 							<div class="product__item">
 								<form method="post">
 									<input type="hidden" name="id_product" th:value="${product.id_product}"
@@ -169,9 +169,107 @@
 								</form>
 							</div>
 						</div>
-						<div class="col-md-12">
-							<!--   Total Items [[${totalItem}]] : Page [[${currentPage}]] of [[${totalPage}]]
-    &nbsp; &nbsp; - &nbsp;-->
+						
+						
+						
+							<div th:if="${nameProduct != null}" th:each="product : ${nameProduct}" class="col-lg-4 col-md-6 col-sm-6">
+							<div class="product__item">
+								<form method="post">
+									<input type="hidden" name="id_product" th:value="${product.id_product}"
+										th:class="'cart_product_id_' + ${product.id_product}">
+									<input type="hidden" name="cart_product_name" th:value="${product.name_product}"
+										th:class="'cart_product_name_' + ${product.id_product}">
+									<input type="hidden" name="" th:value="${product.image1}"
+										th:class="'cart_product_img_' + ${product.id_product}">
+									<input type="hidden" name="" th:value="${product.price_sale}"
+										th:class="'cart_product_price_sale_' + ${product.id_product}">
+									<input type="hidden" name="" th:value="${product.count_product}"
+										th:class="'cart_product_count_' + ${product.id_product}">
+									<input type="hidden" name="" th:value="1"
+										th:class="'cart_product_qty_' + ${product.id_product}">
+
+									<div class="product__item__pic set-bg"
+										th:data-setbg="@{/img/{imageName}(imageName=${product.image1})}">
+										<div class="product__discount__percent" th:text="${product.sale_product +'%'}">
+										</div>
+										<ul class="product__item__pic__hover">
+                                    		<li><a type="button" th:data-id_product="${product.id_product}" class="add_to_wishlist"><i class="fa fa-heart"></i></a></li>
+											<li><a th:href="@{/myshop/detail/{id}(id=${product.id_product})}"><i
+														class="fa fa-retweet"></i></a></li>
+											<li><a type="button" th:data-id_product ="${product.id_product}" class="add_to_cart" ><i
+														class="fa fa-shopping-cart"></i></a></li>
+
+										</ul>
+									</div>
+									<div class="product__item__text">
+										<ul>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+										</ul>
+										<span class="name_category"
+											th:text="${product.categoryEntity.nameCategory}"></span>
+										<h6 th:text="${product.name_product}"><a href="#"></a></h6>
+										<span class="price_sale" th:text="${product.price_sale}"></span>
+										<span class="price_old" th:text="${product.price_product}"></span>
+									</div>
+								</form>
+							</div>
+						</div>
+						
+						
+							<div th:if="${nameCate != null}" th:each="product : ${nameCate}" class="col-lg-4 col-md-6 col-sm-6">
+							<div class="product__item">
+								<form method="post">
+									<input type="hidden" name="id_product" th:value="${product.id_product}"
+										th:class="'cart_product_id_' + ${product.id_product}">
+									<input type="hidden" name="cart_product_name" th:value="${product.name_product}"
+										th:class="'cart_product_name_' + ${product.id_product}">
+									<input type="hidden" name="" th:value="${product.image1}"
+										th:class="'cart_product_img_' + ${product.id_product}">
+									<input type="hidden" name="" th:value="${product.price_sale}"
+										th:class="'cart_product_price_sale_' + ${product.id_product}">
+									<input type="hidden" name="" th:value="${product.count_product}"
+										th:class="'cart_product_count_' + ${product.id_product}">
+									<input type="hidden" name="" th:value="1"
+										th:class="'cart_product_qty_' + ${product.id_product}">
+
+									<div class="product__item__pic set-bg"
+										th:data-setbg="@{/img/{imageName}(imageName=${product.image1})}">
+										<div class="product__discount__percent" th:text="${product.sale_product +'%'}">
+										</div>
+										<ul class="product__item__pic__hover">
+                                    		<li><a type="button" th:data-id_product="${product.id_product}" class="add_to_wishlist"><i class="fa fa-heart"></i></a></li>
+											<li><a th:href="@{/myshop/detail/{id}(id=${product.id_product})}"><i
+														class="fa fa-retweet"></i></a></li>
+											<li><a type="button" th:data-id_product ="${product.id_product}" class="add_to_cart" ><i
+														class="fa fa-shopping-cart"></i></a></li>
+
+										</ul>
+									</div>
+									<div class="product__item__text">
+										<ul>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+											<li class="start"><i class="fa-regular fa-star"></i></i></li>
+										</ul>
+										<span class="name_category"
+											th:text="${product.categoryEntity.nameCategory}"></span>
+										<h6 th:text="${product.name_product}"><a href="#"></a></h6>
+										<span class="price_sale" th:text="${product.price_sale}"></span>
+										<span class="price_old" th:text="${product.price_product}"></span>
+									</div>
+								</form>
+							</div>
+						</div>
+						
+						<div th:if="${products != null and products.size() > 0}" class="col-md-12">
+							   
+    &nbsp; &nbsp; - &nbsp;
 							<ul class="pagination">
 								<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
 									<a class="page-link" th:href="@{'/myshop/page/' + (${currentPage}-1)}">&laquo;</a>

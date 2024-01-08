@@ -129,8 +129,8 @@
 					</div>
 					</form>
 				</div>
-				<div class="col-lg-6">
-					<div class="shoping__continue">
+			<div class="col-lg-6">
+				<!--	<div class="shoping__continue">
 						<div class="shoping__discount">
 							<h5>Mã giảm giá</h5>
 							<form action="{{ URL::to('apply') }}" method="POST" enctype="multipart/form-data">
@@ -144,7 +144,7 @@
 							</form>
 
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<div class="col-lg-6">
 					<div class="shoping__checkout">
@@ -158,7 +158,8 @@
 
 
 							<li>Tổng
-								<span th:text="${total}"> </span>
+									<span
+									th:text="'$' + (${session.cart != null and not session.cart.empty ? session.total : '0'})"></span>
 
 							</li>
 						</ul>

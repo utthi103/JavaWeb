@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Entity.OrderDetail;
 import com.example.demo.Entity.category;
 import com.example.demo.Entity.order;
 import com.example.demo.Entity.order_detail;
@@ -45,5 +46,7 @@ public class order_detailServicce {
 	       order_detail.setPrice(price);
 	        order_detailRepository.save(order_detail);
 	    }
-
+	  public List<order_detail> getOrderDetailsByIdOrderUsingQuery(int idOrder) {
+	        return order_detailRepository.findOrderDetailsByIdOrder(idOrder);
+	    }
 }

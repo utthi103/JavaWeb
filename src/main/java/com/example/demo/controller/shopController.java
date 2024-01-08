@@ -139,4 +139,58 @@ public class shopController {
 	public String contact() {
 		return "shop/contact";
 	}
+	
+	@PostMapping("/myshop/search_name")
+	public String searchName(Model model,@RequestParam("name_product") String name_product) {
+		List<product> results = productService.searchProducts(name_product);
+        model.addAttribute("nameProduct", results);
+        List<category> categoryList = categoryService.getAllCategory();
+        model.addAttribute("categories", categoryList);
+        for (product product : results) {
+            System.out.println(product.getName_product());
+        }
+    	return "shop/myshop";
+	}
+	
+
+	@GetMapping("/myshop/search_category/{cateName}")
+	public String searchCate(Model model,
+			@PathVariable("cateName") String cateName) {
+		List<product> results = productService.searchNameCate(cateName);
+        model.addAttribute("nameCate", results);
+        List<category> categoryList = categoryService.getAllCategory();
+        model.addAttribute("categories", categoryList);
+//        for (product product : results) {
+//            System.out.println(product.getName_product());
+//        }
+    	return "shop/myshop";
+	}
+	
+	@PostMapping("/myshop/search_price")
+	public String searchPrice(Model model
+			,@RequestParam("min_price") String min_price,
+			@RequestParam("max_price") String max_price
+			) {
+		   // Tách giá trị sau ký tự '$'
+	    String[] minArray = min_price.split("\\$");
+	    String[] maxArray = max_price.split("\\$");
+
+	    // Lấy giá trị sau ký tự '$'
+	    String minPrice = minArray[1];
+	    String maxPrice = maxArray[1];
+
+	    // Chuyển đổi giá trị sang kiểu dữ liệu phù hợp (nếu cần)
+	    Float minPriceFloat = Float.parseFloat(minPrice);
+	    Float maxPriceFloat = Float.parseFloat(maxPrice);
+
+		List<product> results = productService.searchPrice(minPriceFloat,maxPriceFloat );
+        model.addAttribute("nameProduct", results);
+        List<category> categoryList = categoryService.getAllCategory();
+        model.addAttribute("categories", categoryList);
+        for (product product : results) {
+            System.out.println(product.getName_product());
+        }
+		System.out.println(maxPrice);
+    	return "shop/myshop";
+	}
 }

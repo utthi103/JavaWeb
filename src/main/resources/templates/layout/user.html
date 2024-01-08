@@ -132,7 +132,7 @@
 						<ul>
 
 							<li th:each="category : ${categories}">
-								<a th:href="@{'/product/listcategory?id=' + ${category.name_category}}"
+								<a th:href="@{/myshop/search_category/{cateName}(cateName=${category.name_category})}"
 									th:text="${category.name_category}">
 
 								</a>
@@ -143,7 +143,7 @@
 				<div class="col-lg-9">
 					<div class="hero__search">
 						<div class="hero__search__form">
-							<form action="{{ route('search.nameca') }}" enctype="multipart/form-data" method="POST">
+							<form th:action="@{/myshop/search_name}" enctype="multipart/form-data" method="POST">
 
 								<div class="hero__search__categories">
 									Danh mục
@@ -185,7 +185,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="footer__about">
 						<div class="footer__about__logo">
-							<a href="./index.html"><img src="{{ asset('img/logo1.jpg') }}" alt=""></a>
+							<a href="./index.html"><img src="{/img/logo1.jpg}" alt=""></a>
 						</div>
 						<ul>
 							<li>Địa chỉ: 470 Trần Đại Nghĩa - Ngũ Hành Sơn - Đà Nẵng</li>
